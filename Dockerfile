@@ -18,18 +18,10 @@ ENV PATH="$PATH":/buildkite/bin \
     BUILDKITE_HOOKS_PATH=/buildkite/hooks \
     BUILDKITE_DISABLE_GIT_SUBMODULES=true
 
-# Install the envconfig script:
-ADD https://raw.githubusercontent.com/blueimp/docker/1.0.0/bin/envconfig.sh \
-  /usr/local/bin/envconfig
-RUN chmod +x /usr/local/bin/envconfig
-
 # Add the envconfig configuration file:
-COPY envconfig.conf /usr/local/etc/envconfig.conf
+COPY envconfig.conf /usr/local/etc/
 
-# Add envconfig as entrypoint init script:
-RUN ln -s /usr/local/bin/envconfig /usr/local/etc/entrypoint.d/20-envconfig.sh
-
-# Add additional entrypoint init scripts:
+# Add the entrypoint init scripts:
 COPY entrypoint.d /usr/local/etc/entrypoint.d
 
 # Run the buildkite agent as superd process with the isolated docker daemon:
