@@ -9,7 +9,7 @@ MAINTAINER Sebastian Tschan <mail@blueimp.net>
 # Install the buildkite agent:
 RUN wget -O - \
   https://raw.githubusercontent.com/buildkite/agent/master/install.sh | \
-  BETA=true DESTINATION=/buildkite bash
+  DESTINATION=/buildkite bash
 
 # Set the buildkite agent environment variables:
 ENV PATH="$PATH":/buildkite/bin \
