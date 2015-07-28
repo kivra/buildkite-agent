@@ -2,7 +2,7 @@
 # Docker Buildkite Agent with Docker-in-Docker support
 #
 
-FROM blueimp/dind:1.6
+FROM blueimp/dind:1.7
 
 MAINTAINER Sebastian Tschan <mail@blueimp.net>
 
