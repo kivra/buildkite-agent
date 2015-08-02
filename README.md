@@ -10,14 +10,19 @@ Supports running docker isolated or bind-mounting the host docker socket.
 ### Provide secrets as environment variables
 
 ```sh
-export BUILDKITE_AGENT_TOKEN=banana
+export BUILDKITE_AGENT_TOKEN='secrettoken'
+
+export DOCKER_HUB_EMAIL='user@example.org'
+export DOCKER_HUB_AUTH='secretauth'
 
 export SSH_PRIVATE_KEY="$(cat ~/.ssh/id_rsa)"
 export SSH_PUBLIC_KEY="$(cat ~/.ssh/id_rsa.pub)"
 export SSH_KNOWN_HOSTS="$(cat ~/.ssh/known_hosts)"
 ```
 
-Replace "banana" with your buildkite agent token.  
+Replace "secrettoken" with your buildkite agent token.  
+Replace "user@example.org" with the email from your `~/.docker/config.json`.  
+Replace "secretauth" with the auth key from your `~/.docker/config.json`.  
 Adjust the SSH file paths to the configuration files for your agent.
 
 ### Using the host docker daemon
@@ -36,6 +41,8 @@ Start the agent with the builds volume and the bind-mounted host docker socket:
 ```bash
 docker run -it \
   -e BUILDKITE_AGENT_TOKEN="$BUILDKITE_AGENT_TOKEN" \
+  -e DOCKER_HUB_EMAIL="$DOCKER_HUB_EMAIL" \
+  -e DOCKER_HUB_AUTH="$DOCKER_HUB_AUTH" \
   -e SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
   -e SSH_PUBLIC_KEY="$SSH_PUBLIC_KEY" \
   -e SSH_KNOWN_HOSTS="$SSH_KNOWN_HOSTS" \
@@ -60,6 +67,8 @@ Start the buildkite agent with an isolated docker daemon:
 ```sh
 docker run -it \
   -e BUILDKITE_AGENT_TOKEN="$BUILDKITE_AGENT_TOKEN" \
+  -e DOCKER_HUB_EMAIL="$DOCKER_HUB_EMAIL" \
+  -e DOCKER_HUB_AUTH="$DOCKER_HUB_AUTH" \
   -e SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
   -e SSH_PUBLIC_KEY="$SSH_PUBLIC_KEY" \
   -e SSH_KNOWN_HOSTS="$SSH_KNOWN_HOSTS" \

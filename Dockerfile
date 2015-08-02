@@ -18,6 +18,9 @@ ENV PATH="$PATH":/buildkite/bin \
     BUILDKITE_HOOKS_PATH=/buildkite/hooks \
     BUILDKITE_DISABLE_GIT_SUBMODULES=true
 
+# Add the docker user configuration:
+COPY docker /root/.docker
+
 # Add the envconfig configuration file:
 COPY envconfig.conf /usr/local/etc/
 
